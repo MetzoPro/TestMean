@@ -1,0 +1,59 @@
+<div class="row">
+  <form class="col s12" #form="ngForm" (ngSubmit)="addSchtroumpf(form.value)" *ngIf="auth.isLoggedIn()">
+    <div class="row">
+      <div class="input-field col s4">
+        <input placeholder="Nom" name="name" type="text" [(ngModel)]="schtroumpfs.name">
+      </div>
+      <div class="input-field col s4">
+        <input placeholder="Email" name="email" type="text" [(ngModel)]="schtroumpfs.email">
+      </div>
+      <div class="input-field col s4">
+        <input placeholder="Race" name="race" type="text" [(ngModel)]="schtroumpfs.race">
+      </div>
+      <div class="input-field col s4">
+        <input placeholder="Famille" name="famille" type="text" [(ngModel)]="schtroumpfs.famille">
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s4">
+        <input placeholder="Nourriture" name="nourriture" type="text" [(ngModel)]="schtroumpfs.nourriture">
+      </div>
+      <div class="input-field col s4">
+        <input placeholder="Age" name="age" type="text" [(ngModel)]="schtroumpfs.age">
+      </div>
+      <div class="input-field col s4">
+        <input placeholder="Adresse" name="adresse" type="text" [(ngModel)]="schtroumpfs.adresse">
+      </div>
+      <button class="waves-effect waves-light btn" *ngIf="!modif" id="btn"  type="submit">Ajouter schtroumpf</button>
+      <button
+        class="waves-effect waves-light btn"
+        *ngIf="modif" type="submit"
+        (click)="updateSchtroumpf(schtroumpfs._id, form.value)">
+        Modifier schtroumpf
+      </button>
+    </div>
+  </form>
+</div>
+<div class="row" *ngIf="auth.isLoggedIn()">
+  <div class="col s12 m4" *ngFor="let schtroumpf of schtroumpfs">
+    <div class="card blue-grey darken-1">
+      <div class="card-image">
+        <img src="assets/images/schtroumpfs.jpg" alt="image"/>
+        <span class="card-title" style="color: black"><strong>{{ schtroumpf.name}}</strong></span>
+      </div>
+      <div class="card-content white-text">
+        <span class="card-title">Details</span>
+        <p>Courriel: {{schtroumpf.email}}</p>
+        <p>Age: {{schtroumpf.age}}</p>
+        <p>Race: {{schtroumpf.race}}</p>
+        <p>Nourriture: {{schtroumpf.nourriture}}</p>
+        <p>famille: {{schtroumpf.famille}}</p>
+        <p>Adresse: {{schtroumpf.adresse}}</p>
+      </div>
+      <div class="card-action">
+        <button (click)="deleteSchtroumpf(schtroumpf._id)">Supprimer</button>
+        <button (click)="getSchtroumpf(schtroumpf._id)">Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
